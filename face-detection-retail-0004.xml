@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<net version="4" name="cnn_fd_004_sq_light_ssd" batch="1">
+<layers>
+<layer id="0" type="Input" name="data" precision="FP16">
+<output>
+<port id="0">
+<dim>1</dim>
+<dim>3</dim>
+<dim>300</dim>
+<dim>300</dim>
+</port>
+</output>
+</layer>
+<layer id="1" type="ScaleShift" name="Scale1/Mul_/FusedScaleShift_" precision="FP16">
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>3</dim>
+<dim>300</dim>
+<dim>300</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>3</dim>
+<dim>300</dim>
+<dim>300</dim>
+</port>
+</output>
+<blobs>
+<weights size="6" offset="0"/>
+<biases size="6" offset="6"/>
+</blobs>
+</layer>
+<layer id="2" type="Convolution" name="Convolution1" precision="FP16">
+<data strides="2,2" pads_end="3,3" pads_begin="3,3" output="32" kernel="7,7" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>3</dim>
+<dim>300</dim>
+<dim>300</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>150</dim>
+<dim>150</dim>
+</port>
+</output>
+<blobs>
+<weights size="9408" offset="12"/>
+<biases size="64" offset="9420"/>
+</blobs>
+</layer>
+<layer id="3" type="ReLU" name="ReLU1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>150</dim>
+<dim>150</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>150</dim>
+<dim>150</dim>
+</port>
+</output>
+</layer>
+<layer id="4" type="Pooling" name="Pooling1" precision="FP16">
+<data strides="2,2" pads_end="0,0" pads_begin="0,0" kernel="3,3" rounding_type="ceil" pool-method="max" exclude-pad="true"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>150</dim>
+<dim>150</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="5" type="Convolution" name="fire2/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="8" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="512" offset="9484"/>
+<biases size="16" offset="9996"/>
+</blobs>
+</layer>
+<layer id="6" type="ReLU" name="fire2/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="7" type="Convolution" name="fire2/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="32" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="4608" offset="10012"/>
+<biases size="64" offset="14620"/>
+</blobs>
+</layer>
+<layer id="8" type="ReLU" name="fire2/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="9" type="Convolution" name="fire2/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="32" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="512" offset="14684"/>
+<biases size="64" offset="15196"/>
+</blobs>
+</layer>
+<layer id="10" type="ReLU" name="fire2/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="11" type="Concat" name="Concat1" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="12" type="Convolution" name="fire3/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="8" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="1024" offset="15260"/>
+<biases size="16" offset="16284"/>
+</blobs>
+</layer>
+<layer id="13" type="ReLU" name="fire3/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="14" type="Convolution" name="fire3/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="32" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="4608" offset="16300"/>
+<biases size="64" offset="20908"/>
+</blobs>
+</layer>
+<layer id="15" type="ReLU" name="fire3/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="16" type="Convolution" name="fire3/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="32" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>8</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="512" offset="20972"/>
+<biases size="64" offset="21484"/>
+</blobs>
+</layer>
+<layer id="17" type="ReLU" name="fire3/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="18" type="Concat" name="Concat2" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="19" type="Convolution" name="fire4/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="16" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>16</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="2048" offset="21548"/>
+<biases size="32" offset="23596"/>
+</blobs>
+</layer>
+<layer id="20" type="ReLU" name="fire4/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>16</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="21" type="Convolution" name="fire4/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="64" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="18432" offset="23628"/>
+<biases size="128" offset="42060"/>
+</blobs>
+</layer>
+<layer id="22" type="ReLU" name="fire4/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="23" type="Convolution" name="fire4/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="64" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+<blobs>
+<weights size="2048" offset="42188"/>
+<biases size="128" offset="44236"/>
+</blobs>
+</layer>
+<layer id="24" type="ReLU" name="fire4/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="25" type="Concat" name="Concat3" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>128</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</output>
+</layer>
+<layer id="26" type="Convolution" name="fire5/squeeze1x1" precision="FP16">
+<data strides="2,2" pads_end="0,0" pads_begin="0,0" output="16" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>75</dim>
+<dim>75</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>16</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="4096" offset="44364"/>
+<biases size="32" offset="48460"/>
+</blobs>
+</layer>
+<layer id="27" type="ReLU" name="fire5/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>16</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="28" type="Convolution" name="fire5/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="64" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="18432" offset="48492"/>
+<biases size="128" offset="66924"/>
+</blobs>
+</layer>
+<layer id="29" type="ReLU" name="fire5/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="30" type="Convolution" name="fire5/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="64" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>16</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="2048" offset="67052"/>
+<biases size="128" offset="69100"/>
+</blobs>
+</layer>
+<layer id="31" type="ReLU" name="fire5/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="32" type="Concat" name="Concat4" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>64</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="33" type="Convolution" name="fire6/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="24" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="6144" offset="69228"/>
+<biases size="48" offset="75372"/>
+</blobs>
+</layer>
+<layer id="34" type="ReLU" name="fire6/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="35" type="Convolution" name="fire6/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="96" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="41472" offset="75420"/>
+<biases size="192" offset="116892"/>
+</blobs>
+</layer>
+<layer id="36" type="ReLU" name="fire6/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="37" type="Convolution" name="fire6/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="96" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="4608" offset="117084"/>
+<biases size="192" offset="121692"/>
+</blobs>
+</layer>
+<layer id="38" type="ReLU" name="fire6/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="39" type="Concat" name="Concat5" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>192</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="40" type="Convolution" name="fire7/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="24" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="9216" offset="121884"/>
+<biases size="48" offset="131100"/>
+</blobs>
+</layer>
+<layer id="41" type="ReLU" name="fire7/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="42" type="Convolution" name="fire7/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="96" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="41472" offset="131148"/>
+<biases size="192" offset="172620"/>
+</blobs>
+</layer>
+<layer id="43" type="ReLU" name="fire7/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="44" type="Convolution" name="fire7/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="96" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>24</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="4608" offset="172812"/>
+<biases size="192" offset="177420"/>
+</blobs>
+</layer>
+<layer id="45" type="ReLU" name="fire7/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="46" type="Concat" name="Concat6" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>96</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>192</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="47" type="Convolution" name="fire8/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="32" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="12288" offset="177612"/>
+<biases size="64" offset="189900"/>
+</blobs>
+</layer>
+<layer id="48" type="ReLU" name="fire8/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="49" type="Convolution" name="fire8/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="128" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="73728" offset="189964"/>
+<biases size="256" offset="263692"/>
+</blobs>
+</layer>
+<layer id="50" type="ReLU" name="fire8/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="51" type="Convolution" name="fire8/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="128" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+<blobs>
+<weights size="8192" offset="263948"/>
+<biases size="256" offset="272140"/>
+</blobs>
+</layer>
+<layer id="52" type="ReLU" name="fire8/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="53" type="Concat" name="Concat7" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>256</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</output>
+</layer>
+<layer id="54" type="Convolution" name="fire9/squeeze1x1" precision="FP16">
+<data strides="2,2" pads_end="0,0" pads_begin="0,0" output="32" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>256</dim>
+<dim>38</dim>
+<dim>38</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>32</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="16384" offset="272396"/>
+<biases size="64" offset="288780"/>
+</blobs>
+</layer>
+<layer id="55" type="ReLU" name="fire9/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>32</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="56" type="Convolution" name="fire9/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="128" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="73728" offset="288844"/>
+<biases size="256" offset="362572"/>
+</blobs>
+</layer>
+<layer id="57" type="ReLU" name="fire9/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="58" type="Convolution" name="fire9/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="128" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>32</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="8192" offset="362828"/>
+<biases size="256" offset="371020"/>
+</blobs>
+</layer>
+<layer id="59" type="ReLU" name="fire9/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="60" type="Concat" name="Concat8" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>128</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>256</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="61" type="Convolution" name="fire10/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="48" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>256</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="24576" offset="371276"/>
+<biases size="96" offset="395852"/>
+</blobs>
+</layer>
+<layer id="62" type="ReLU" name="fire10/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="63" type="Convolution" name="fire10/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="192" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="165888" offset="395948"/>
+<biases size="384" offset="561836"/>
+</blobs>
+</layer>
+<layer id="64" type="ReLU" name="fire10/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="65" type="Convolution" name="fire10/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="192" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="18432" offset="562220"/>
+<biases size="384" offset="580652"/>
+</blobs>
+</layer>
+<layer id="66" type="ReLU" name="fire10/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="67" type="Concat" name="Concat9" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="68" type="Convolution" name="fire11/squeeze1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="48" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="36864" offset="581036"/>
+<biases size="96" offset="617900"/>
+</blobs>
+</layer>
+<layer id="69" type="ReLU" name="fire11/relu_squeeze1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="70" type="Convolution" name="fire11/expand3x3" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="192" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="165888" offset="617996"/>
+<biases size="384" offset="783884"/>
+</blobs>
+</layer>
+<layer id="71" type="ReLU" name="fire11/relu_expand3x3" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="72" type="Convolution" name="fire11/expand1x1" precision="FP16">
+<data strides="1,1" pads_end="0,0" pads_begin="0,0" output="192" kernel="1,1" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>48</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="18432" offset="784268"/>
+<biases size="384" offset="802700"/>
+</blobs>
+</layer>
+<layer id="73" type="ReLU" name="fire11/relu_expand1x1" precision="FP16">
+<data negative_slope="0.0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="74" type="Concat" name="Concat10" precision="FP16">
+<data axis="1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>192</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+</layer>
+<layer id="75" type="Convolution" name="fc7_mbox_loc" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="36" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>36</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="248832" offset="803084"/>
+<biases size="72" offset="1051916"/>
+</blobs>
+</layer>
+<layer id="76" type="Permute" name="fc7_mbox_loc_perm" precision="FP16">
+<data order="0,2,3,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>36</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>19</dim>
+<dim>19</dim>
+<dim>36</dim>
+</port>
+</output>
+</layer>
+<layer id="77" type="Flatten" name="fc7_mbox_loc_flat" precision="FP16">
+<data axis="1" end_axis="-1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>19</dim>
+<dim>19</dim>
+<dim>36</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>12996</dim>
+</port>
+</output>
+</layer>
+<layer id="78" type="Convolution" name="fc7_mbox_conf" precision="FP16">
+<data strides="1,1" pads_end="1,1" pads_begin="1,1" output="18" kernel="3,3" group="1" dilations="1,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>18</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</output>
+<blobs>
+<weights size="124416" offset="1051988"/>
+<biases size="36" offset="1176404"/>
+</blobs>
+</layer>
+<layer id="79" type="Permute" name="fc7_mbox_conf_perm" precision="FP16">
+<data order="0,2,3,1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>18</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>19</dim>
+<dim>19</dim>
+<dim>18</dim>
+</port>
+</output>
+</layer>
+<layer id="80" type="Flatten" name="fc7_mbox_conf_flat" precision="FP16">
+<data axis="1" end_axis="-1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>19</dim>
+<dim>19</dim>
+<dim>18</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>6498</dim>
+</port>
+</output>
+</layer>
+<layer id="81" type="Const" name="mbox_conf_reshape/DimData_const" precision="FP16">
+<output>
+<port id="1">
+<dim>3</dim>
+</port>
+</output>
+<blobs>
+<custom size="6" offset="1176440"/>
+</blobs>
+</layer>
+<layer id="82" type="Reshape" name="mbox_conf_reshape" precision="FP16">
+<data axis="0" num_axes="-1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>6498</dim>
+</port>
+<port id="1">
+<dim>3</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>3249</dim>
+<dim>2</dim>
+</port>
+</output>
+</layer>
+<layer id="83" type="SoftMax" name="mbox_conf_softmax" precision="FP16">
+<data axis="2"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>3249</dim>
+<dim>2</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>3249</dim>
+<dim>2</dim>
+</port>
+</output>
+</layer>
+<layer id="84" type="Flatten" name="mbox_conf_flatten" precision="FP16">
+<data axis="1" end_axis="-1"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>3249</dim>
+<dim>2</dim>
+</port>
+</input>
+<output>
+<port id="1">
+<dim>1</dim>
+<dim>6498</dim>
+</port>
+</output>
+</layer>
+<layer id="85" type="PriorBoxClustered" name="fc7_mbox_priorbox" precision="FP16">
+<data offset="0.5" width="9.399999618530273,25.100000381469727,14.699999809265137,34.70000076293945,143.0,77.4000015258789,128.8000030517578,51.099998474121094,75.5999984741211" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224" step="16.0" height="15.0,39.599998474121094,25.5,63.20000076293945,227.5,162.89999389648438,124.5,105.0999984741211,72.5999984741211" flip="1" clip="0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>384</dim>
+<dim>19</dim>
+<dim>19</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>3</dim>
+<dim>300</dim>
+<dim>300</dim>
+</port>
+</input>
+<output>
+<port id="2">
+<dim>1</dim>
+<dim>2</dim>
+<dim>12996</dim>
+</port>
+</output>
+</layer>
+<layer id="86" type="DetectionOutput" name="detection_out" precision="FP16">
+<data visualize="False" variance_encoded_in_target="0" top_k="400" share_location="1" num_classes="2" normalized="1" nms_threshold="0.44999998807907104" keep_top_k="200" input_width="1" input_height="1" eta="1.0" confidence_threshold="0.009999999776482582" code_type="caffe.PriorBoxParameter.CENTER_SIZE" background_label_id="0"/>
+<input>
+<port id="0">
+<dim>1</dim>
+<dim>12996</dim>
+</port>
+<port id="1">
+<dim>1</dim>
+<dim>6498</dim>
+</port>
+<port id="2">
+<dim>1</dim>
+<dim>2</dim>
+<dim>12996</dim>
+</port>
+</input>
+<output>
+<port id="3">
+<dim>1</dim>
+<dim>1</dim>
+<dim>200</dim>
+<dim>7</dim>
+</port>
+</output>
+</layer>
+</layers>
+<edges>
+<edge to-port="0" to-layer="1" from-port="0" from-layer="0"/>
+<edge to-port="0" to-layer="2" from-port="3" from-layer="1"/>
+<edge to-port="0" to-layer="3" from-port="3" from-layer="2"/>
+<edge to-port="0" to-layer="4" from-port="1" from-layer="3"/>
+<edge to-port="0" to-layer="5" from-port="1" from-layer="4"/>
+<edge to-port="0" to-layer="6" from-port="3" from-layer="5"/>
+<edge to-port="0" to-layer="7" from-port="1" from-layer="6"/>
+<edge to-port="0" to-layer="8" from-port="3" from-layer="7"/>
+<edge to-port="0" to-layer="9" from-port="1" from-layer="6"/>
+<edge to-port="0" to-layer="10" from-port="3" from-layer="9"/>
+<edge to-port="0" to-layer="11" from-port="1" from-layer="8"/>
+<edge to-port="1" to-layer="11" from-port="1" from-layer="10"/>
+<edge to-port="0" to-layer="12" from-port="2" from-layer="11"/>
+<edge to-port="0" to-layer="13" from-port="3" from-layer="12"/>
+<edge to-port="0" to-layer="14" from-port="1" from-layer="13"/>
+<edge to-port="0" to-layer="15" from-port="3" from-layer="14"/>
+<edge to-port="0" to-layer="16" from-port="1" from-layer="13"/>
+<edge to-port="0" to-layer="17" from-port="3" from-layer="16"/>
+<edge to-port="0" to-layer="18" from-port="1" from-layer="15"/>
+<edge to-port="1" to-layer="18" from-port="1" from-layer="17"/>
+<edge to-port="0" to-layer="19" from-port="2" from-layer="18"/>
+<edge to-port="0" to-layer="20" from-port="3" from-layer="19"/>
+<edge to-port="0" to-layer="21" from-port="1" from-layer="20"/>
+<edge to-port="0" to-layer="22" from-port="3" from-layer="21"/>
+<edge to-port="0" to-layer="23" from-port="1" from-layer="20"/>
+<edge to-port="0" to-layer="24" from-port="3" from-layer="23"/>
+<edge to-port="0" to-layer="25" from-port="1" from-layer="22"/>
+<edge to-port="1" to-layer="25" from-port="1" from-layer="24"/>
+<edge to-port="0" to-layer="26" from-port="2" from-layer="25"/>
+<edge to-port="0" to-layer="27" from-port="3" from-layer="26"/>
+<edge to-port="0" to-layer="28" from-port="1" from-layer="27"/>
+<edge to-port="0" to-layer="29" from-port="3" from-layer="28"/>
+<edge to-port="0" to-layer="30" from-port="1" from-layer="27"/>
+<edge to-port="0" to-layer="31" from-port="3" from-layer="30"/>
+<edge to-port="0" to-layer="32" from-port="1" from-layer="29"/>
+<edge to-port="1" to-layer="32" from-port="1" from-layer="31"/>
+<edge to-port="0" to-layer="33" from-port="2" from-layer="32"/>
+<edge to-port="0" to-layer="34" from-port="3" from-layer="33"/>
+<edge to-port="0" to-layer="35" from-port="1" from-layer="34"/>
+<edge to-port="0" to-layer="36" from-port="3" from-layer="35"/>
+<edge to-port="0" to-layer="37" from-port="1" from-layer="34"/>
+<edge to-port="0" to-layer="38" from-port="3" from-layer="37"/>
+<edge to-port="0" to-layer="39" from-port="1" from-layer="36"/>
+<edge to-port="1" to-layer="39" from-port="1" from-layer="38"/>
+<edge to-port="0" to-layer="40" from-port="2" from-layer="39"/>
+<edge to-port="0" to-layer="41" from-port="3" from-layer="40"/>
+<edge to-port="0" to-layer="42" from-port="1" from-layer="41"/>
+<edge to-port="0" to-layer="43" from-port="3" from-layer="42"/>
+<edge to-port="0" to-layer="44" from-port="1" from-layer="41"/>
+<edge to-port="0" to-layer="45" from-port="3" from-layer="44"/>
+<edge to-port="0" to-layer="46" from-port="1" from-layer="43"/>
+<edge to-port="1" to-layer="46" from-port="1" from-layer="45"/>
+<edge to-port="0" to-layer="47" from-port="2" from-layer="46"/>
+<edge to-port="0" to-layer="48" from-port="3" from-layer="47"/>
+<edge to-port="0" to-layer="49" from-port="1" from-layer="48"/>
+<edge to-port="0" to-layer="50" from-port="3" from-layer="49"/>
+<edge to-port="0" to-layer="51" from-port="1" from-layer="48"/>
+<edge to-port="0" to-layer="52" from-port="3" from-layer="51"/>
+<edge to-port="0" to-layer="53" from-port="1" from-layer="50"/>
+<edge to-port="1" to-layer="53" from-port="1" from-layer="52"/>
+<edge to-port="0" to-layer="54" from-port="2" from-layer="53"/>
+<edge to-port="0" to-layer="55" from-port="3" from-layer="54"/>
+<edge to-port="0" to-layer="56" from-port="1" from-layer="55"/>
+<edge to-port="0" to-layer="57" from-port="3" from-layer="56"/>
+<edge to-port="0" to-layer="58" from-port="1" from-layer="55"/>
+<edge to-port="0" to-layer="59" from-port="3" from-layer="58"/>
+<edge to-port="0" to-layer="60" from-port="1" from-layer="57"/>
+<edge to-port="1" to-layer="60" from-port="1" from-layer="59"/>
+<edge to-port="0" to-layer="61" from-port="2" from-layer="60"/>
+<edge to-port="0" to-layer="62" from-port="3" from-layer="61"/>
+<edge to-port="0" to-layer="63" from-port="1" from-layer="62"/>
+<edge to-port="0" to-layer="64" from-port="3" from-layer="63"/>
+<edge to-port="0" to-layer="65" from-port="1" from-layer="62"/>
+<edge to-port="0" to-layer="66" from-port="3" from-layer="65"/>
+<edge to-port="0" to-layer="67" from-port="1" from-layer="64"/>
+<edge to-port="1" to-layer="67" from-port="1" from-layer="66"/>
+<edge to-port="0" to-layer="68" from-port="2" from-layer="67"/>
+<edge to-port="0" to-layer="69" from-port="3" from-layer="68"/>
+<edge to-port="0" to-layer="70" from-port="1" from-layer="69"/>
+<edge to-port="0" to-layer="71" from-port="3" from-layer="70"/>
+<edge to-port="0" to-layer="72" from-port="1" from-layer="69"/>
+<edge to-port="0" to-layer="73" from-port="3" from-layer="72"/>
+<edge to-port="0" to-layer="74" from-port="1" from-layer="71"/>
+<edge to-port="1" to-layer="74" from-port="1" from-layer="73"/>
+<edge to-port="0" to-layer="75" from-port="2" from-layer="74"/>
+<edge to-port="0" to-layer="76" from-port="3" from-layer="75"/>
+<edge to-port="0" to-layer="77" from-port="1" from-layer="76"/>
+<edge to-port="0" to-layer="78" from-port="2" from-layer="74"/>
+<edge to-port="0" to-layer="79" from-port="3" from-layer="78"/>
+<edge to-port="0" to-layer="80" from-port="1" from-layer="79"/>
+<edge to-port="0" to-layer="82" from-port="1" from-layer="80"/>
+<edge to-port="1" to-layer="82" from-port="1" from-layer="81"/>
+<edge to-port="0" to-layer="83" from-port="2" from-layer="82"/>
+<edge to-port="0" to-layer="84" from-port="1" from-layer="83"/>
+<edge to-port="0" to-layer="85" from-port="2" from-layer="74"/>
+<edge to-port="1" to-layer="85" from-port="3" from-layer="1"/>
+<edge to-port="0" to-layer="86" from-port="1" from-layer="77"/>
+<edge to-port="1" to-layer="86" from-port="1" from-layer="84"/>
+<edge to-port="2" to-layer="86" from-port="2" from-layer="85"/>
+</edges>
+<meta_data>
+<MO_version value="2019.1.0-178-ga427cda"/>
+<cli_parameters>
+<data_type value="FP16"/>
+<disable_fusing value="False"/>
+<disable_gfusing value="False"/>
+<disable_nhwc_to_nchw value="False"/>
+<disable_omitting_optional value="False"/>
+<disable_resnet_optimization value="False"/>
+<enable_concat_optimization value="False"/>
+<enable_flattening_nested_params value="False"/>
+<extensions value="DIR"/>
+<framework value="caffe"/>
+<generate_deprecated_IR_V2 value="False"/>
+<input value="data"/>
+<input_model value="DIR/cnn_fd_004_sq_light_ssd.caffemodel"/>
+<input_model_is_text value="False"/>
+<input_proto value="DIR/cnn_fd_004_sq_light_ssd.prototxt"/>
+<input_shape value="[1,3,300,300]"/>
+<k value="DIR/CustomLayersMapping.xml"/>
+<keep_shape_ops value="False"/>
+<legacy_mxnet_model value="False"/>
+<log_level value="ERROR"/>
+<mean_scale_values value="{}"/>
+<mean_values value="()"/>
+<model_name value="face-detection-retail-0004"/>
+<move_to_preprocess value="False"/>
+<output value="['detection_out']"/>
+<output_dir value="DIR"/>
+<placeholder_shapes value="{'data': array([ 1, 3, 300, 300])}"/>
+<remove_output_softmax value="False"/>
+<reverse_input_channels value="False"/>
+<save_params_from_nd value="False"/>
+<scale_values value="()"/>
+<silent value="False"/>
+<version value="False"/>
+<unset unset_cli_parameters="batch, counts, finegrain_fusing, freeze_placeholder_with_value, input_checkpoint, input_meta_graph, input_symbol, mean_file, mean_file_offsets, nd_prefix_name, pretrained_model_name, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_operation_patterns, tensorflow_subgraph_patterns, tensorflow_use_custom_operations_config"/>
+</cli_parameters>
+</meta_data>
+</net>

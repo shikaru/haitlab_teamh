@@ -1,0 +1,16 @@
+{% extends "layout.html" %} {% block content %} {% if images %} {% for path in
+images %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <small class="text-muted">{{ path }}</small>
+    </div>
+    <h2>
+      <img
+        src="images/{{ path }}"
+        style="margin-top: 10px; vertical-align: bottom; width: 200px;"
+      />
+    </h2>
+  </div>
+</article>
+{% endfor %} {% endif %} {% endblock content %}
