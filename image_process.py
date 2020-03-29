@@ -18,7 +18,7 @@ def g_mosaic(src, ratio=0.1):
     small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
     return cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
 
-def mosaic_area(src, x, y, width, height, ratio=0.03):
+def mosaic_area(src, x, y, width, height, ratio=0.07):
     dst = src.copy()
     dst[y:y + height, x:x + width] = g_mosaic(dst[y:y + height, x:x + width], ratio)
     return dst 
@@ -52,5 +52,6 @@ def mosaic(frame):
         if confidence > 0.3:
             w = xmax - xmin
             h = ymax - ymin
+            #cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color=(0, 180, 240), thickness=3)
             frame = mosaic_area(frame, xmin, ymin, w, h)
     return frame
